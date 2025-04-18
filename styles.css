@@ -14,8 +14,8 @@
   --secondary-font: var(--primary-font);
   
   /* 레이아웃 변수 - 최대 너비 1008px로 설정 */
-  --container-width: 90%;
-  --notion-max-width: 1008px;
+  --container-width: 1008px !important;
+  --notion-max-width: 1008px !important;
   --border-radius: 8px;
   --navbar-padding: 2rem;
   
@@ -95,21 +95,41 @@ body, .notion-app {
   --navbar-btn-fg-color: #32281F;
 }
 
-/* 레이아웃 - 최대 너비 1008px 적용 */
+/* 레이아웃 - 최대 너비 1008px 적용 및 가운데 정렬 */
 .notion-full-width {
   padding: 0;
 }
 
+/* 직접적인 너비 제한 설정 */
+.notion-app, 
+.super-content,
+.super-content-container,
+.notion-frame {
+  max-width: 1008px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 페이지 너비 제한 */
 .notion-page, 
 .bullet-column-container,
 .blog_main,
-.categories-section {
-  max-width: var(--notion-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+.categories-section,
+.notion-column-list,
+.notion-collection-page {
+  max-width: 1008px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   background: var(--bg-color);
   padding: 0 24px;
+  text-align: center; /* 모든 텍스트 가운데 정렬 */
+}
+
+/* 콘텐츠 너비 명시적 제한 */
+.super-content-container {
+  max-width: 1008px !important;
+  width: 1008px !important;
 }
 
 .notion-page-no-cover {
@@ -179,9 +199,18 @@ body, .notion-app {
   box-shadow: 0 5px 15px rgba(139, 90, 43, 0.3);
 }
 
-/* 타이포그래피 */
+/* 타이포그래피 - 가운데 정렬 */
 .notion-title {
   display: none;
+}
+
+.notion-h1, 
+.notion-h2, 
+.notion-h3, 
+.notion-text {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .notion-h1 {
@@ -190,6 +219,7 @@ body, .notion-app {
   margin-top: 2rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  max-width: 85%;
 }
 
 .notion-h2 {
@@ -199,6 +229,7 @@ body, .notion-app {
   color: var(--fg-color);
   letter-spacing: -0.01em;
   line-height: 1.3;
+  max-width: 90%;
 }
 
 .notion-h3 {
@@ -207,6 +238,7 @@ body, .notion-app {
   margin-top: 1rem;
   color: var(--fg-color);
   line-height: 1.4;
+  max-width: 90%;
 }
 
 .notion-text {
@@ -214,13 +246,14 @@ body, .notion-app {
   letter-spacing: 0.2px;
   line-height: 1.6;
   color: var(--fg-color-3);
+  max-width: 95%;
 }
 
 .notion-hash-link {
   display: none;
 }
 
-/* 버튼 */
+/* 버튼 - 가운데 정렬 */
 .bullet-btn {
   background: var(--primary-color);
   color: #fff;
@@ -231,6 +264,9 @@ body, .notion-app {
   opacity: 1;
   padding: 12px 28px;
   transition: all 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .bullet-btn:hover {
@@ -240,13 +276,18 @@ body, .notion-app {
   box-shadow: 0 8px 20px rgba(139, 90, 43, 0.2);
 }
 
-/* 카드 & 콜아웃 */
+/* 카드 & 콜아웃 - 가운데 정렬된 텍스트 */
 .notion-callout {
   border: 1px solid rgba(139, 90, 43, 0.15);
   border-radius: var(--border-radius);
   background: rgba(210, 180, 140, 0.05);
   padding: 1.5rem 2rem;
   transition: all 0.3s ease;
+  text-align: center;
+}
+
+.notion-callout-text {
+  text-align: center;
 }
 
 .notion-callout:hover {
@@ -261,6 +302,7 @@ body, .notion-app {
   overflow: hidden;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 
 .notion-default_co:hover {
@@ -289,6 +331,7 @@ body, .notion-app {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .notion-gray_background_co:hover {
@@ -300,15 +343,17 @@ body, .notion-app {
   color: #fff;
 }
 
-/* 토글 */
+/* 토글 - 가운데 정렬된 내용 */
 .notion-toggle {
   background: var(--bg-color);
   border-radius: var(--border-radius);
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   padding: 0;
   position: relative;
   border: 1px solid rgba(139, 90, 43, 0.15);
   transition: all 0.3s ease;
+  text-align: center;
+  max-width: 95%;
 }
 
 .notion-toggle:hover {
@@ -321,10 +366,12 @@ body, .notion-app {
   padding: 1.2rem 1.5rem;
   font-weight: 600;
   color: var(--fg-color);
+  text-align: center;
 }
 
 .notion-toggle div .notion-text {
   padding: 0 1.5rem 1.5rem;
+  text-align: center;
 }
 
 summary:after {
@@ -341,10 +388,11 @@ details[open] summary:after {
   transform: rotate(0deg);
 }
 
-/* 갤러리 그리드 */
+/* 갤러리 그리드 - 중앙 정렬 */
 .notion-gallery-grid {
   border: none;
   gap: 2rem;
+  margin: 0 auto;
 }
 
 .notion-gallery-grid-size-medium {
@@ -356,6 +404,7 @@ details[open] summary:after {
   overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid rgba(139, 90, 43, 0.08) !important;
+  margin: 0 auto;
 }
 
 .notion-collection-card:hover {
@@ -378,24 +427,44 @@ details[open] summary:after {
 
 .notion-collection-card-body {
   padding: 1.2rem !important;
+  text-align: center;
 }
 
-/* 리스트 */
+.notion-collection-card-property {
+  text-align: center;
+}
+
+.notion-property-text {
+  text-align: center;
+}
+
+/* 페이지 타이틀 가운데 정렬 */
+.notion-page-title-text {
+  text-align: center;
+}
+
+/* 리스트 - 가운데 정렬 위한 조정 */
 .notion-list-disc {
   list-style: none;
-  padding-inline-start: 2.5rem;
+  padding-inline-start: 0;
   position: relative;
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .notion-list-disc li {
   position: relative;
   margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  display: inline-block;
+  text-align: left;
 }
 
 .notion-list-disc li:before {
   content: "";
   position: absolute;
-  left: -1.5rem;
+  left: 0;
   top: 0.6rem;
   width: 6px;
   height: 6px;
@@ -403,11 +472,12 @@ details[open] summary:after {
   background: var(--primary-color);
 }
 
-/* 푸터 */
+/* 푸터 - 가운데 정렬 */
 .bullet-footer {
   background-color: var(--footer-bg-color);
   color: var(--footer-fg-color);
   padding: 3rem 0;
+  text-align: center;
 }
 
 .footer-title {
@@ -416,11 +486,13 @@ details[open] summary:after {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .footer-link {
   color: rgba(255, 255, 255, 0.8);
   transition: color 0.3s ease;
+  text-align: center;
 }
 
 .footer-link:hover {
@@ -431,35 +503,42 @@ details[open] summary:after {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
   margin-top: 2rem;
+  text-align: center;
 }
 
-/* 블로그 */
+/* 블로그 - 가운데 정렬 */
 .blog_page_content .notion-h1 {
   font-size: 2.5rem;
   line-height: 1.3;
+  text-align: center;
 }
 
 .blog_page_content .notion-h2 {
   font-size: 2rem;
   margin-top: 2rem;
+  text-align: center;
 }
 
 .blog_page_content .notion-h3 {
   font-size: 1.5rem;
   margin-top: 1.5rem;
+  text-align: center;
 }
 
 .blog_page_content .notion-text {
   font-size: 1.125rem;
   line-height: 1.7;
+  text-align: center;
 }
 
 .blog_navigator {
   background: rgba(210, 180, 140, 0.1);
   border-radius: var(--border-radius);
   padding: 1.5rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   border: 1px solid rgba(139, 90, 43, 0.1);
+  text-align: center;
+  max-width: 90%;
 }
 
 .blog_navigator_title {
@@ -467,6 +546,33 @@ details[open] summary:after {
   font-weight: 600;
   color: var(--primary-color-dark);
   padding-bottom: 1rem;
+  text-align: center;
+}
+
+/* 이미지 중앙 정렬 */
+.notion-asset-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.notion-asset-wrapper img {
+  margin: 0 auto;
+}
+
+/* 컬럼 레이아웃 중앙 정렬 */
+.bullet-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.notion-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 /* 반응형 - 모바일에서 342px로 제한 */
@@ -522,7 +628,23 @@ details[open] summary:after {
 @media screen and (max-width: 640px) {
   /* 모바일에서 342px 너비 적용 */
   :root {
-    --notion-max-width: 342px;
+    --container-width: 342px !important;
+    --notion-max-width: 342px !important;
+  }
+  
+  /* 직접적인 너비 설정 */
+  .notion-app, 
+  .super-content,
+  .super-content-container,
+  .notion-frame,
+  .notion-page, 
+  .bullet-column-container,
+  .blog_main,
+  .categories-section,
+  .notion-column-list,
+  .notion-collection-page {
+    max-width: 342px !important;
+    width: 100% !important;
   }
   
   .notion-page, 
@@ -540,4 +662,28 @@ details[open] summary:after {
     margin-top: 1rem;
     padding: 1rem;
   }
+  
+  .notion-h1,
+  .notion-h2,
+  .notion-h3,
+  .notion-text {
+    max-width: 100%;
+  }
+}
+
+/* 콘텐츠 영역 너비 고정 */
+.super-wrapper {
+  max-width: 1008px !important;
+  margin: 0 auto !important;
+}
+
+/* Bullet 특정 컨테이너 */
+.super-content-container .notion-frame {
+  max-width: 1008px !important;
+  margin: 0 auto !important;
+}
+
+.notion-column-list {
+  max-width: 1008px !important;
+  margin: 0 auto !important;
 }
